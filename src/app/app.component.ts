@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ToDoService } from './app.service';
+import { ToDoItem } from './toDoItem';
 
 @Component({
   selector: 'app-root',
@@ -8,29 +10,28 @@ import { Component } from '@angular/core';
 
 export class AppComponent {
   title = 'Pearl Hacks To Do List';
+  items: Array<ToDoItem> = [];
+  
 
-  items: Array<any> = [];
-  // [{title: "Meet another participant", completed: true}, 
-  // {title: "Meet a mentor", completed: true},
-  // {title: "Eat lots of food", completed: true},
-  // {title: "Drink caffeine", completed: false},
-  // {title: "Learn a new coding language", completed: true},
-  // {title: "Learn about a sponsor organization", completed: false},
-  // {title: "Attend the project demos", completed: false}];
+  constructor(private appService: ToDoService){
+  }
+
+  ngOnInit(){
+    this.appService.get().subscribe(items => {this.items = items}, error => {console.log(error)}  );
+  }
 
 
-  handleClick = (item) => {  
-    const index = this.items.findIndex(x => x.title == item.title);
-    this.items[index].completed = !this.items[index].completed;
+  handleComplete = (id) => {
+    this.appService.completeItem(id);
   }
 
   handleAdd = (input) => {
-    this.items.push({title: input, completed: false});
+    let item = {id: null, description: input, completed: false};
+    this.appService.add(item);
   }
 
-  handleDelete = (item) => {
-    const index = this.items.findIndex(x => x.title == item.title);
-    this.items.splice(index, 1);
+  handleDelete = (id) => {
+    this.appService.delete(id);
   }
 
 }

@@ -12,9 +12,9 @@
     <h2 class="no-items" *ngIf="!items.length">You have no items on your {{title}}. Add some!</h2>
     
     <ul class="list" *ngIf="items.length">
-      <li *ngFor="let item of items" [class]="item.completed" (click)="handleClick(item)">
-        {{item.title}}
-        <span class="delete" (click)="handleDelete(item)">X</span>
+      <li *ngFor="let item of items" [class]="item.completed" (click)="handleComplete(item.id)">
+        {{item.description}}
+        <span class="delete" (click)="handleDelete(item.id)">X</span>
       </li>
     </ul>
   </div>

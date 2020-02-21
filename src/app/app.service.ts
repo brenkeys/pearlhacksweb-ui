@@ -4,7 +4,7 @@ import {environment} from "../environments/environment";
 import {ToDoItem} from "./toDoItem";
 
 @Injectable({ providedIn: 'root' })
-export class OrderService {
+export class ToDoService {
 
   private baseUrl = '';
 
@@ -15,4 +15,17 @@ export class OrderService {
   get() {
     return this.apiclient.get<ToDoItem[]>(this.baseUrl + `/`);
   }
+
+  add(item) {
+    return this.apiclient.post(this.baseUrl + `/item`, item);
+  }
+
+  completeItem(id) {
+    return this.apiclient.put(this.baseUrl + `/item/${id}/mark-complete`, id)
+  }
+
+  delete(id) {
+    return this.apiclient.delete(this.baseUrl + `/item/${id}`, id)
+  }
+
 }
