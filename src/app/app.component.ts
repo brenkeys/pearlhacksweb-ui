@@ -10,14 +10,18 @@ import { ToDoItem } from './toDoItem';
 
 export class AppComponent {
   title = 'Pearl Hacks To Do List';
-  items: Array<ToDoItem> = [];
-  
+  items: ToDoItem [] = [];
+
 
   constructor(private appService: ToDoService){
   }
 
   ngOnInit(){
-    this.appService.get().subscribe(items => {this.items = items}, error => {console.log(error)}  );
+    this.appService.get().subscribe(items => {
+      this.items = items
+    }, error => {
+      console.log(error)
+    });
   }
 
 
