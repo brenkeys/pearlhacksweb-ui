@@ -22,11 +22,11 @@ export class AppComponent {
 
   handleComplete = (id) => {
     this.appService.completeItem(id).subscribe(result => {
+      this.getAllItems();
       console.log('Item completed successfuly: ' + id);
     }, error => {
       console.log(error);
     });
-    this.getAllItems();
   }
 
   handleAdd = (input) => {
@@ -36,20 +36,21 @@ export class AppComponent {
     item.completed = false;
 
     this.appService.add(item).subscribe( result => {
+      this.getAllItems();
       console.log('Item created successfuly: ' + item);
       }, error => {
       console.log(error);
       });
-    this.getAllItems();
+    
   }
 
   handleDelete = (id) => {
     this.appService.delete(id).subscribe(result => {
+      this.getAllItems();
       console.log('Item deleted successfully: ' + id);
     }, error => {
       console.log(error);
     });
-    this.getAllItems();
   }
 
   getAllItems(){

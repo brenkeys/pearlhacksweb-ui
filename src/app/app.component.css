@@ -10,14 +10,15 @@
 }
 
 .container{
-    height: 70%;
-    width: 35%;
+    height: 90%;
+    width: 60%;
     margin: auto;
     padding: 30px;
     box-sizing: border-box;
     background-color: #FAFAFA; 
     border-radius: 16px;
     text-align: center;
+    overflow: scroll;
 }
 
 .title{
