@@ -17,25 +17,46 @@ export class AppComponent {
   }
 
   ngOnInit(){
+    this.getAllItems();
+  }
+
+  handleComplete = (id) => {
+    this.appService.completeItem(id).subscribe(result => {
+      console.log('Item completed successfuly: ' + id);
+    }, error => {
+      console.log(error);
+    });
+    this.getAllItems();
+  }
+
+  handleAdd = (input) => {
+    let item = new ToDoItem();
+    item.id = 0;
+    item.description = input;
+    item.completed = false;
+
+    this.appService.add(item).subscribe( result => {
+      console.log('Item created successfuly: ' + item);
+      }, error => {
+      console.log(error);
+      });
+    this.getAllItems();
+  }
+
+  handleDelete = (id) => {
+    this.appService.delete(id).subscribe(result => {
+      console.log('Item deleted successfully: ' + id);
+    }, error => {
+      console.log(error);
+    });
+    this.getAllItems();
+  }
+
+  getAllItems(){
     this.appService.get().subscribe(items => {
       this.items = items
     }, error => {
       console.log(error)
     });
   }
-
-
-  handleComplete = (id) => {
-    this.appService.completeItem(id);
-  }
-
-  handleAdd = (input) => {
-    let item = {id: null, description: input, completed: false};
-    this.appService.add(item);
-  }
-
-  handleDelete = (id) => {
-    this.appService.delete(id);
-  }
-
 }

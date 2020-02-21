@@ -16,16 +16,16 @@ export class ToDoService {
     return this.apiclient.get<ToDoItem[]>(this.baseUrl + `/`);
   }
 
-  add(item) {
-    return this.apiclient.post(this.baseUrl + `/item`, item);
+  add(item: ToDoItem) {
+    return this.apiclient.post<ToDoItem>(this.baseUrl + `/item`, item);
   }
 
   completeItem(id) {
-    return this.apiclient.put(this.baseUrl + `/item/${id}/mark-complete`, id)
+    return this.apiclient.put(this.baseUrl + `/item/${id}/mark-complete`, null);
   }
 
   delete(id) {
-    return this.apiclient.delete(this.baseUrl + `/item/${id}`, id)
+    return this.apiclient.delete(this.baseUrl + `/item/${id}`, id);
   }
 
 }
